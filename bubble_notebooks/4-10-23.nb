@@ -1,0 +1,3439 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    144747,       3431]
+NotebookOptionsPosition[    141954,       3390]
+NotebookOutlinePosition[    142396,       3407]
+CellTagsIndexPosition[    142353,       3404]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ProcessImage", "[", "img_", "]"}], " ", ":=", " ", "\n", "  ", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"procImg", " ", "=", " ", 
+     RowBox[{"DeleteSmallComponents", "[", 
+      RowBox[{"FillingTransform", "[", "\n", "      ", 
+       RowBox[{"Binarize", "[", 
+        RowBox[{"img", ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", " ", "0.325"}], "}"}]}], "]"}], "]"}], "]"}]}], 
+    ";", " ", "\n", "   ", 
+    RowBox[{"centroids", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"ComponentMeasurements", "[", 
+       RowBox[{"procImg", ",", " ", "\"\<Centroid\>\""}], "]"}], " ", "/.", 
+      " ", "\n", "     ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"a_", " ", "->", " ", "b_"}], ")"}], " ", "->", " ", 
+       "b"}]}]}], ";", " ", 
+    RowBox[{"radii", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"ComponentMeasurements", "[", 
+       RowBox[{
+       "procImg", ",", " ", "\n", "      ", "\"\<EquivalentDiskRadius\>\""}], 
+       "]"}], " ", "/.", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"a_", " ", "->", " ", "b_"}], ")"}], " ", "->", " ", 
+       "b"}]}]}], ";", " ", "\n", "   ", 
+    RowBox[{"volumes", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"4", "*", "Pi", "*", 
+        RowBox[{"radii", "^", "3"}]}], ")"}], "/", "3"}]}], ";", " ", 
+    RowBox[{"return", "[", 
+     RowBox[{
+     "centroids", ",", " ", "radii", ",", " ", "\n", "    ", "volumes"}], 
+     "]"}]}], ")"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"img", " ", "=", " ", 
+    RowBox[{
+    "Import", "[", 
+     "\"\<C:\\\\Users\\\\Rares\\\\Desktop\\\\bubbles\\\\bubble_sequen\\\nce\\\
+\\bubble_sequence_2.jpg\>\"", "]"}]}], ";"}], " "}], "\n", 
+ RowBox[{"ProcessImage", "[", "img", "]"}]}], "Input",
+ CellChangeTimes->{{3.9054271890821457`*^9, 3.905427213269955*^9}, {
+   3.905427258368443*^9, 3.905427444323495*^9}, {3.9054274824496775`*^9, 
+   3.9054274836002245`*^9}, {3.9054275225971975`*^9, 3.9054275292032595`*^9}, 
+   3.905427567976931*^9, {3.9054276342817116`*^9, 3.9054278010946255`*^9}, {
+   3.9054279381299624`*^9, 3.9054279387502537`*^9}, {3.9054280301829743`*^9, 
+   3.9054281190373907`*^9}, {3.9054283221228037`*^9, 3.905428388785677*^9}, {
+   3.905428496118664*^9, 3.905428548146184*^9}, {3.905428579738281*^9, 
+   3.9054286335675964`*^9}, {3.90542875468915*^9, 3.905428862170577*^9}, {
+   3.9054289054255543`*^9, 3.90542890633599*^9}, {3.9054289456302595`*^9, 
+   3.9054289787856464`*^9}, {3.9054291357132936`*^9, 3.905429178254264*^9}, {
+   3.905429221136478*^9, 3.905429238153322*^9}, {3.9054293430707254`*^9, 
+   3.9054293759482613`*^9}, {3.9054294865941224`*^9, 
+   3.9054295773651004`*^9}, {3.9054296338582478`*^9, 3.905429661766201*^9}, {
+   3.90543021442902*^9, 3.905430219878191*^9}, 3.9054302813479986`*^9, {
+   3.9054303233731403`*^9, 3.9054303587057295`*^9}, {3.905430419256499*^9, 
+   3.9054304410714455`*^9}, {3.9054304841784315`*^9, 3.905430596919406*^9}, {
+   3.9054306652653275`*^9, 3.9054306739946117`*^9}, {3.905430740861806*^9, 
+   3.905430809842553*^9}, {3.9054309265093355`*^9, 3.905430926619345*^9}, {
+   3.9054309830634255`*^9, 3.9054309832039127`*^9}, {3.905431147148739*^9, 
+   3.9054312350231867`*^9}, {3.9054314244970293`*^9, 3.905431512324579*^9}, {
+   3.9054315441855617`*^9, 3.9054316927331877`*^9}, {3.9054317459853673`*^9, 
+   3.9054317461059513`*^9}, {3.9054318587978797`*^9, 3.90543186383142*^9}, {
+   3.905431915018216*^9, 3.905431952640921*^9}, {3.905441164930813*^9, 
+   3.905441232730523*^9}},
+ FormatType->"InputForm",
+ CellLabel->
+  "In[181]:=",ExpressionUUID->"b886a8ae-2f1a-4244-93c3-a53f10f5e76b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.9054324375842586`*^9, 3.905432438795854*^9}},
+ CellLabel->
+  "In[184]:=",ExpressionUUID->"f1f17a22-5e07-46f6-8c33-1f643fdd1fe6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Area\""}], "]"}]}], ";", 
+                    RowBox[{"radii", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskRadius\""}], 
+                    "]"}]}], ";", 
+                    RowBox[{"eccentricity", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Eccentricity\""}], "]"}]}], 
+                    ";", "procImg"}], ")"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{11., {4., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{11., {4., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Area"]; $CellContext`radii = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskRadius"]; $CellContext`eccentricity = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Eccentricity"]; $CellContext`procImg)}], "SubValues" -> None, 
+    "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> None, "Attributes" -> {}, "FullName" -> 
+    "Global`ProcessImage"|>, False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.905428909006054*^9, 
+   3.9054289826705484`*^9, 3.905429179447135*^9, 3.905429238833737*^9, 
+   3.9054293939076247`*^9, 3.905429494987148*^9},
+ CellLabel->
+  "Out[102]=",ExpressionUUID->"682165c0-1c5a-45b5-80a1-3c789386e4ca"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "\[Rule]", "531.625`"}], ",", 
+   RowBox[{"2", "\[Rule]", "624.25`"}]}], "}"}]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.905428909006054*^9, 
+   3.9054289826705484`*^9, 3.905429179447135*^9, 3.905429238833737*^9, 
+   3.9054293939076247`*^9},
+ CellLabel->"Out[99]=",ExpressionUUID->"aeaca5c9-db7f-4a3c-8425-990cd5438ea3"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Area\""}], "]"}]}], ";", 
+                    RowBox[{"radii", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskRadius\""}], 
+                    "]"}]}], ";", 
+                    RowBox[{"eccentricity", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Eccentricity\""}], "]"}]}], 
+                    ";", "eccentricity", ";", "areas"}], ")"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{11., {4., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{11., {4., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Area"]; $CellContext`radii = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskRadius"]; $CellContext`eccentricity = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Eccentricity"]; $CellContext`eccentricity; $CellContext`areas)}], 
+    "SubValues" -> None, "DefaultValues" -> None, "NValues" -> None, 
+    "FormatValues" -> None, "Options" -> None, "Attributes" -> {}, "FullName" -> 
+    "Global`ProcessImage"|>, False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.905428909006054*^9, 
+   3.9054289826705484`*^9, 3.905429179447135*^9, 3.905429238833737*^9, 
+   3.905429393887622*^9},
+ CellLabel->"Out[98]=",ExpressionUUID->"f48ba0e0-8681-4701-b306-a65c6a10d9a4"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "\[Rule]", "0.5292473242096318`"}], ",", 
+   RowBox[{"2", "\[Rule]", "0.44571842059034184`"}]}], "}"}]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.905428909006054*^9, 
+   3.9054289826705484`*^9, 3.905429179447135*^9, 3.905429238833737*^9},
+ CellLabel->"Out[95]=",ExpressionUUID->"9359f277-ef4a-4496-8c48-4317a1e29db9"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskCoverage\""}], 
+                    "]"}]}], ";", 
+                    RowBox[{"radii", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskRadius\""}], 
+                    "]"}]}], ";", 
+                    RowBox[{"eccentricity", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Eccentricity\""}], "]"}]}], 
+                    ";", "eccentricity"}], ")"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{11., {4., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{11., {4., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskCoverage"]; $CellContext`radii = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskRadius"]; $CellContext`eccentricity = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Eccentricity"]; $CellContext`eccentricity)}], "SubValues" -> None,
+     "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> None, "Attributes" -> {}, "FullName" -> 
+    "Global`ProcessImage"|>, False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.905428909006054*^9, 
+   3.9054289826705484`*^9, 3.905429179447135*^9, 3.9054292388037186`*^9},
+ CellLabel->"Out[94]=",ExpressionUUID->"cde00d39-c0da-4a32-82ce-944889fe32ca"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "\[Rule]", "0.15153239907646154`"}], ",", 
+   RowBox[{"2", "\[Rule]", "0.10482678237871124`"}]}], "}"}]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.905428909006054*^9, 
+   3.9054289826705484`*^9, 3.905429179447135*^9},
+ CellLabel->"Out[91]=",ExpressionUUID->"a56834da-71e7-4039-a960-7ec138074b49"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskCoverage\""}], 
+                    "]"}]}], ";", 
+                    RowBox[{"radii", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskRadius\""}], 
+                    "]"}]}], ";", 
+                    RowBox[{"elongation", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Elongation\""}], "]"}]}], ";", 
+                    "elongation"}], ")"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskCoverage"]; $CellContext`radii = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskRadius"]; $CellContext`elongation = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Elongation"]; $CellContext`elongation)}], "SubValues" -> None, 
+    "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> None, "Attributes" -> {}, "FullName" -> 
+    "Global`ProcessImage"|>, False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.905428909006054*^9, 
+   3.9054289826705484`*^9, 3.905429178916893*^9},
+ CellLabel->"Out[90]=",ExpressionUUID->"173187ba-204f-4e28-990a-fd278f59e410"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "\[Rule]", "0.8291594237884077`"}], ",", 
+   RowBox[{"2", "\[Rule]", "0.9115571798334883`"}]}], "}"}]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.905428909006054*^9, 
+   3.9054289826705484`*^9},
+ CellLabel->"Out[87]=",ExpressionUUID->"8875cb1c-bb14-4789-a459-c145ef20aed5"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskCoverage\""}], 
+                    "]"}]}], ";", 
+                    RowBox[{"radii", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskRadius\""}], 
+                    "]"}]}], ";", "areas"}], ")"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskCoverage"]; $CellContext`radii = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskRadius"]; $CellContext`areas)}], "SubValues" -> None, 
+    "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> None, "Attributes" -> {}, "FullName" -> 
+    "Global`ProcessImage"|>, False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.905428909006054*^9, 
+   3.9054289826505413`*^9},
+ CellLabel->"Out[86]=",ExpressionUUID->"f1bb5e8d-2aa2-456a-a934-0685a9443254"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "\[Rule]", "531.625`"}], ",", 
+   RowBox[{"2", "\[Rule]", "624.25`"}]}], "}"}]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.905428909006054*^9},
+ CellLabel->"Out[83]=",ExpressionUUID->"3aafed98-82ad-4c42-b06a-5b2957473134"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Area\""}], "]"}]}], ";", 
+                    RowBox[{"radii", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskRadius\""}], 
+                    "]"}]}], ";", "areas"}], ")"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Area"]; $CellContext`radii = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskRadius"]; $CellContext`areas)}], "SubValues" -> None, 
+    "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> None, "Attributes" -> {}, "FullName" -> 
+    "Global`ProcessImage"|>, False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}, 3.9054289089960527`*^9},
+ CellLabel->"Out[82]=",ExpressionUUID->"b5e73141-8953-461d-b8f7-99c713ff95b1"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "\[Rule]", "14.23714815368972`"}], ",", 
+   RowBox[{"2", "\[Rule]", "14.713938969562161`"}]}], "}"}]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428863221109*^9}},
+ CellLabel->"Out[79]=",ExpressionUUID->"4d5b82e8-f1be-4b9d-9d09-3c1a788a85b3"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Area\""}], "]"}]}], ";", 
+                    RowBox[{"radii", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskRadius\""}], 
+                    "]"}]}], ";", "radii"}], ")"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Area"]; $CellContext`radii = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskRadius"]; $CellContext`radii)}], "SubValues" -> None, 
+    "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> None, "Attributes" -> {}, "FullName" -> 
+    "Global`ProcessImage"|>, False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.9054288632011023`*^9}},
+ CellLabel->"Out[78]=",ExpressionUUID->"642cb874-6c4e-49e7-8be0-a73c0f745487"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "\[Rule]", "14.23714815368972`"}], ",", 
+   RowBox[{"2", "\[Rule]", "14.713938969562161`"}]}], "}"}]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.9054288428318267`*^9}},
+ CellLabel->"Out[75]=",ExpressionUUID->"553e2e31-4ad0-4bdc-8bf0-55de8fabd361"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas1", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Area\""}], "]"}]}], ";", 
+                    RowBox[{"areas2", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskRadius\""}], 
+                    "]"}]}], ";", "areas2"}], ")"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas1 = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Area"]; $CellContext`areas2 = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskRadius"]; $CellContext`areas2)}], "SubValues" -> None,
+     "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> None, "Attributes" -> {}, "FullName" -> 
+    "Global`ProcessImage"|>, False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.905428842821825*^9}},
+ CellLabel->"Out[74]=",ExpressionUUID->"a4de84d1-0391-4050-a9ba-e64d0a8f6c23"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "\[Rule]", "531.625`"}], ",", 
+   RowBox[{"2", "\[Rule]", "624.25`"}]}], "}"}]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.9054288196255064`*^9}},
+ CellLabel->"Out[71]=",ExpressionUUID->"42ba8601-fa59-4944-8c02-f058d2b5fd78"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas1", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Area\""}], "]"}]}], ";", 
+                    RowBox[{"areas2", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskRadius\""}], 
+                    "]"}]}], ";", "areas1"}], ")"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas1 = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Area"]; $CellContext`areas2 = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskRadius"]; $CellContext`areas1)}], "SubValues" -> None,
+     "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> None, "Attributes" -> {}, "FullName" -> 
+    "Global`ProcessImage"|>, False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, {
+   3.9054287979196215`*^9, 3.9054288196055*^9}},
+ CellLabel->"Out[70]=",ExpressionUUID->"d01c9505-4d35-4b9d-904f-3c4117af6c30"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"1", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"131.5530303030303`", ",", "69.59469696969697`"}], "}"}]}], ",", 
+   RowBox[{"2", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"39.09516129032258`", ",", "67.73225806451613`"}], "}"}]}]}], 
+  "}"}]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, 
+   3.9054287979196215`*^9},
+ CellLabel->"Out[67]=",ExpressionUUID->"bfb5041b-9d59-4687-afe5-45530797c81f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Area\""}], "]"}]}], ";", 
+                    RowBox[{"areas", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"BoundingDiskRadius\""}], 
+                    "]"}]}], ";", "centroids"}], ")"}]}]}, {" "}}, 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  DefaultBaseStyle -> "Column", 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Area"]; $CellContext`areas = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "BoundingDiskRadius"]; $CellContext`centroids)}], "SubValues" -> 
+    None, "DefaultValues" -> None, "NValues" -> None, "FormatValues" -> None, 
+    "Options" -> None, "Attributes" -> {}, "FullName" -> 
+    "Global`ProcessImage"|>, False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 3.90542875042801*^9}, 
+   3.9054287978596115`*^9},
+ CellLabel->"Out[66]=",ExpressionUUID->"c6feaea6-f67b-4edb-84a9-74d0c959e7f8"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[
+           TagBox[GridBox[{
+              {
+               StyleBox[
+                TagBox[
+                 TooltipBox[
+                  StyleBox["\<\" Definitions\"\>", "InformationRowLabel",
+                   StripOnInput->False],
+                  "\"Definitions\"",
+                  TooltipStyle->"TextStyling"],
+                 Annotation[#, "Definitions", "Tooltip"]& ], "DialogStyle",
+                StripOnInput->False]},
+              {
+               TemplateBox[{"\"\[ThinSpace]\"", 
+                 GridBox[{{
+                    RowBox[{
+                    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+                    RowBox[{"(", 
+                    RowBox[{
+                    RowBox[{"procImg", "=", 
+                    RowBox[{"DeleteSmallComponents", "[", 
+                    RowBox[{"FillingTransform", "[", 
+                    RowBox[{"Binarize", "[", 
+                    RowBox[{"img", ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0.325`"}], "}"}]}], "]"}], "]"}], 
+                    "]"}]}], ";", 
+                    RowBox[{"centroids", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Centroid\""}], "]"}]}], ";", 
+                    RowBox[{"areas", "=", 
+                    RowBox[{"ComponentMeasurements", "[", 
+                    RowBox[{"procImg", ",", "\"Area\""}], "]"}]}], ";", 
+                    RowBox[{"radii", "=", 
+                    FractionBox["areas", "\[Pi]"]}], ";", "radii"}], 
+                    ")"}]}]}, {" "}}, DefaultBaseStyle -> "Column", 
+                  GridBoxAlignment -> {"Columns" -> {{Left}}}, 
+                  GridBoxItemSize -> {
+                   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]},
+                "RowDefault"]}
+             },
+             DefaultBaseStyle->"Column",
+             GridBoxAlignment->{"Columns" -> {{Left}}},
+             
+             GridBoxItemSize->{
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+            "Column"],
+           FrameMargins->{{6, 0}, {3, 6}}], "\<\"\"\>"},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"Global`ProcessImage\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->{{6, 6}, {6, 3}}], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{10., {3., 7.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{10., {3., 7.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\"Global`ProcessImage\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[<|
+   "ObjectType" -> "Symbol", "Usage" -> "Global`ProcessImage", 
+    "Documentation" -> None, "OwnValues" -> None, "UpValues" -> None, 
+    "DownValues" -> 
+    Information`InformationValueForm[
+     DownValues, $CellContext`ProcessImage, {$CellContext`ProcessImage[
+         Pattern[$CellContext`img, 
+          Blank[]]] :> ($CellContext`procImg = DeleteSmallComponents[
+           FillingTransform[
+            Binarize[$CellContext`img, {0, 0.325}]]]; $CellContext`centroids = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Centroid"]; $CellContext`areas = 
+         ComponentMeasurements[$CellContext`procImg, 
+           "Area"]; $CellContext`radii = $CellContext`areas/
+          Pi; $CellContext`radii)}], "SubValues" -> None, "DefaultValues" -> 
+    None, "NValues" -> None, "FormatValues" -> None, "Options" -> None, 
+    "Attributes" -> {}, "FullName" -> "Global`ProcessImage"|>, 
+   False]]], "Output",
+ GeneratedCell->False,
+ CellAutoOverwrite->False,
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634508772*^9, {3.9054287488182945`*^9, 
+   3.90542875042801*^9}},ExpressionUUID->"a1c1dd6a-684c-461b-9dba-\
+99e76c32d665"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   FractionBox[
+    RowBox[{"1", "\[Rule]", "531.625`"}], "\[Pi]"], ",", 
+   FractionBox[
+    RowBox[{"2", "\[Rule]", "624.25`"}], "\[Pi]"]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.905427447792392*^9, 3.905427532125718*^9, 3.9054275716443305`*^9, 
+   3.9054276408272038`*^9, 3.9054276750204964`*^9, {3.905427721197777*^9, 
+   3.905427735620411*^9}, 3.9054278024987035`*^9, {3.905427915894866*^9, 
+   3.9054279404927645`*^9}, {3.905428063944811*^9, 3.9054280787364106`*^9}, 
+   3.9054281091978035`*^9, 3.9054283252362795`*^9, 3.9054283896655416`*^9, 
+   3.905428634518786*^9},
+ CellLabel->"Out[63]=",ExpressionUUID->"f03b14b8-878a-4b8d-9176-e643496db164"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{3.9054279090532427`*^9},
+ NumberMarks->False,
+ CellLabel->
+  "In[185]:=",ExpressionUUID->"d0022adb-936c-4ab7-8ba4-86bc392e5dff"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.905427910594981*^9, 3.905427910604981*^9}},
+ CellLabel->
+  "In[186]:=",ExpressionUUID->"e94cf76c-514f-4d5e-8b84-9501d8c9c1c4"]
+},
+WindowSize->{569.25, 624.75},
+WindowMargins->{{Automatic, 332.25}, {-15.75, Automatic}},
+Magnification:>1.1 Inherited,
+FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (July 24, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"aa549e72-f85e-4ce7-92f1-fee6abb27821"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3637, 75, 210, "Input",ExpressionUUID->"b886a8ae-2f1a-4244-93c3-a53f10f5e76b"],
+Cell[CellGroupData[{
+Cell[4220, 99, 177, 3, 31, "Input",ExpressionUUID->"f1f17a22-5e07-46f6-8c33-1f643fdd1fe6"],
+Cell[4400, 104, 12017, 286, 416, "Output",ExpressionUUID->"682165c0-1c5a-45b5-80a1-3c789386e4ca"],
+Cell[16420, 392, 915, 17, 35, "Output",ExpressionUUID->"aeaca5c9-db7f-4a3c-8425-990cd5438ea3"],
+Cell[17338, 411, 12033, 285, 436, "Output",ExpressionUUID->"f48ba0e0-8681-4701-b306-a65c6a10d9a4"],
+Cell[29374, 698, 911, 16, 35, "Output",ExpressionUUID->"9359f277-ef4a-4496-8c48-4317a1e29db9"],
+Cell[30288, 716, 12028, 285, 436, "Output",ExpressionUUID->"cde00d39-c0da-4a32-82ce-944889fe32ca"],
+Cell[42319, 1003, 890, 16, 35, "Output",ExpressionUUID->"a56834da-71e7-4039-a960-7ec138074b49"],
+Cell[43212, 1021, 11992, 285, 375, "Output",ExpressionUUID->"173187ba-204f-4e28-990a-fd278f59e410"],
+Cell[55207, 1308, 866, 16, 35, "Output",ExpressionUUID->"8875cb1c-bb14-4789-a459-c145ef20aed5"],
+Cell[56076, 1326, 11646, 279, 353, "Output",ExpressionUUID->"f1bb5e8d-2aa2-456a-a934-0685a9443254"],
+Cell[67725, 1607, 815, 15, 35, "Output",ExpressionUUID->"3aafed98-82ad-4c42-b06a-5b2957473134"],
+Cell[68543, 1624, 11552, 276, 353, "Output",ExpressionUUID->"b5e73141-8953-461d-b8f7-99c713ff95b1"],
+Cell[80098, 1902, 815, 15, 35, "Output",ExpressionUUID->"4d5b82e8-f1be-4b9d-9d09-3c1a788a85b3"],
+Cell[80916, 1919, 11530, 276, 353, "Output",ExpressionUUID->"642cb874-6c4e-49e7-8be0-a73c0f745487"],
+Cell[92449, 2197, 817, 15, 35, "Output",ExpressionUUID->"553e2e31-4ad0-4bdc-8bf0-55de8fabd361"],
+Cell[93269, 2214, 11534, 276, 353, "Output",ExpressionUUID->"a4de84d1-0391-4050-a9ba-e64d0a8f6c23"],
+Cell[104806, 2492, 795, 15, 35, "Output",ExpressionUUID->"42ba8601-fa59-4944-8c02-f058d2b5fd78"],
+Cell[105604, 2509, 11532, 276, 353, "Output",ExpressionUUID->"d01c9505-4d35-4b9d-904f-3c4117af6c30"],
+Cell[117139, 2787, 929, 20, 35, "Output",ExpressionUUID->"bfb5041b-9d59-4687-afe5-45530797c81f"],
+Cell[118071, 2809, 11512, 276, 353, "Output",ExpressionUUID->"c6feaea6-f67b-4edb-84a9-74d0c959e7f8"],
+Cell[129586, 3087, 11296, 273, 367, "Output",ExpressionUUID->"a1c1dd6a-684c-461b-9dba-99e76c32d665"],
+Cell[140885, 3362, 698, 14, 52, "Output",ExpressionUUID->"f03b14b8-878a-4b8d-9176-e643496db164"]
+}, Open  ]],
+Cell[141598, 3379, 174, 4, 30, "Input",ExpressionUUID->"d0022adb-936c-4ab7-8ba4-86bc392e5dff"],
+Cell[141775, 3385, 175, 3, 30, "Input",ExpressionUUID->"e94cf76c-514f-4d5e-8b84-9501d8c9c1c4"]
+}
+]
+*)
+
