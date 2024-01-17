@@ -1,2 +1,0 @@
-source of single image technique: https://www.youtube.com/watch?v=Ngsjzw5vYM4
-video opener: https://imagej.nih.gov/ij/plugins/avi-reader.html
