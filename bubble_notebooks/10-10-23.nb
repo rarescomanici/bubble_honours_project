@@ -1,0 +1,178 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6570,        170]
+NotebookOptionsPosition[      6207,        156]
+NotebookOutlinePosition[      6616,        172]
+CellTagsIndexPosition[      6573,        169]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "This", " ", "notebook", " ", "gets", " ", "the", " ", "video", " ", 
+     "and", " ", "gets", " ", "the", " ", "frames"}], ";", " ", 
+    RowBox[{"processes", " ", "them"}]}], "\[IndentingNewLine]", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"imgCropped", "=", 
+       RowBox[{"ImageCrop", "[", 
+        RowBox[{"img", ",", 
+         RowBox[{"{", 
+          RowBox[{"500", ",", "500"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"procImg", "=", 
+       RowBox[{"DeleteSmallComponents", "[", 
+        RowBox[{
+         RowBox[{"FillingTransform", "[", 
+          RowBox[{"Binarize", "[", 
+           RowBox[{"imgCropped", ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0.15"}], "}"}]}], "]"}], "]"}], ",", "110"}], 
+        "]"}]}], ";", 
+      RowBox[{"centroids", "=", 
+       RowBox[{
+        RowBox[{"ComponentMeasurements", "[", 
+         RowBox[{"procImg", ",", "\"\<Centroid\>\""}], "]"}], "/.", 
+        "\[VeryThinSpace]", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"a_", "\[Rule]", "b_"}], ")"}], "\[Rule]", "b"}]}]}], ";", 
+      RowBox[{"radii", "=", 
+       RowBox[{
+        RowBox[{"ComponentMeasurements", "[", 
+         RowBox[{"procImg", ",", "\"\<EquivalentDiskRadius\>\""}], "]"}], "/.",
+         "\[VeryThinSpace]", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"a_", "\[Rule]", "b_"}], ")"}], "\[Rule]", "b"}]}]}], ";", 
+      RowBox[{"volumes", "=", 
+       FractionBox[
+        RowBox[{"4", " ", "\[Pi]", " ", 
+         SuperscriptBox["radii", "3"]}], "3"]}], ";", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Print", "[", 
+        RowBox[{"HighlightImage", "[", 
+         RowBox[{"imgCropped", ",", "centroids"}], "]"}], "]"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"HighlightImage", "[", 
+         RowBox[{"procImg", ",", "centroids"}], "]"}], "]"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "Remove", " ", "semicolon", " ", "for", " ", "debugging", " ", 
+         "images"}], "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"centroids", ",", "radii", ",", "volumes"}], "]"}]}]}], 
+     ")"}]}], "\n", 
+   RowBox[{
+    RowBox[{"img", "=", 
+     RowBox[{
+     "Import", "[", 
+      "\"\<C:\\\\Users\\\\Rares\\\\Desktop\\\\bubbles\\\\bubble_data\\\\\
+Cordin 1 Prentice set\\\\Data Analysis Project - URG\\\\Best of Close to \
+Sub\\\\0.2v parallel config\\\\2006Aug2_083302\\\\frameH_00.jpg\>\"", "]"}]}],
+     ";"}], "\[IndentingNewLine]", 
+   RowBox[{"ProcessImage", "[", "img", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Extracting", " ", "frames", " ", "from", " ", "video"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"vid", "=", 
+     RowBox[{
+     "Import", "[", 
+      "\"\<C:\\\\Users\\\\Rares\\\\Desktop\\\\bubbles\\\\bubble_data\\\\\
+Cordin 1 Prentice set\\\\Data Analysis Project - URG\\\\Best of Close to \
+Sub\\\\0.2v parallel config\\\\2006Aug2_083302\\\\2006Aug2_083302.avi\>\"", 
+      "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"vidFrames", "=", 
+     RowBox[{"VideoExtractFrames", "[", 
+      RowBox[{"vid", ",", " ", "All"}], "]"}]}], ";"}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Iterating", " ", "over", " ", "the", " ", "frames", " ", "and", " ", 
+     "outputting", " ", "the", " ", "function"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"i", "=", "1"}], ",", 
+       RowBox[{"i", "<=", 
+        RowBox[{"Length", "[", "vidFrames", "]"}]}], ",", 
+       RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"ProcessImage", "[", 
+         RowBox[{"vidFrames", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "]"}], ";"}]}], "]"}], 
+     "\[IndentingNewLine]", "For", " ", "loop", " ", "not", " ", "working", 
+     " ", "for", " ", "some", " ", "reason"}], "*)"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{"ProcessImage", "[", 
+      RowBox[{"vidFrames", "[", 
+       RowBox[{"[", "n", "]"}], "]"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", 
+       RowBox[{"Length", "[", "vidFrames", "]"}]}], "}"}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.9054428271159773`*^9, 3.905442869104681*^9}, {
+   3.905442905544667*^9, 3.9054429772322454`*^9}, {3.905443061482803*^9, 
+   3.905443081511575*^9}, {3.9054431167634172`*^9, 3.9054431560626106`*^9}, {
+   3.905443262294507*^9, 3.9054433883247385`*^9}, {3.9054434684020452`*^9, 
+   3.905443538065693*^9}, {3.9054436421668005`*^9, 3.90544368767017*^9}, {
+   3.905443737074891*^9, 3.9054437425222545`*^9}, {3.905443797087028*^9, 
+   3.9054439022174034`*^9}, {3.9054439877465897`*^9, 3.90544404532666*^9}, {
+   3.905444130415886*^9, 3.90544413565757*^9}, {3.90544420194263*^9, 
+   3.905444246101821*^9}, 3.9054444200878487`*^9, {3.90544469478331*^9, 
+   3.905444828341466*^9}, {3.905444864883011*^9, 3.905444997309757*^9}, {
+   3.9054450979108124`*^9, 3.905445106658807*^9}, {3.9054451490056553`*^9, 
+   3.90544517645886*^9}, {3.9054452285061474`*^9, 3.9054452286081734`*^9}, {
+   3.90544526383638*^9, 3.9054452639518976`*^9}, {3.906290890578765*^9, 
+   3.9062909412035227`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"ca19d73c-e77b-4869-a757-3bab717c9865"]
+},
+WindowSize->{718.5, 729.75},
+WindowMargins->{{Automatic, 253.5}, {Automatic, 12.75}},
+FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (July 24, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"db0b0dfa-7568-4897-8ab3-536ac0aabcdc"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 5645, 134, 728, "Input",ExpressionUUID->"ca19d73c-e77b-4869-a757-3bab717c9865"]
+}
+]
+*)
+
