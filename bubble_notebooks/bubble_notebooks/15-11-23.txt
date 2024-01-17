@@ -1,9 +1,0 @@
-ImageJ measurements:
-50.51x32.31
-1 micron = 3.9 px
-1 microns^2 = 15.21 px^2
-area = 1632 px^2 = 107 microns^2
-
-500x500
-area = 250000 px^2 = 16436 microns^2
-1 microns = 128.2 px
