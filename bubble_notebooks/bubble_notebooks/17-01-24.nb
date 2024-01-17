@@ -1,0 +1,393 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     16341,        385]
+NotebookOptionsPosition[     15981,        371]
+NotebookOutlinePosition[     16385,        387]
+CellTagsIndexPosition[     16342,        384]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Notebook", " ", "to", " ", "isolate", " ", "and", " ", "analyse", " ", 
+    "cases", " ", "where", " ", "only", " ", "one", " ", "bubble", " ", "can",
+     " ", "be", " ", "detected"}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"imgCropped", "=", 
+       RowBox[{"ImageCrop", "[", 
+        RowBox[{"img", ",", 
+         RowBox[{"{", 
+          RowBox[{"500", ",", "500"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"brightness", " ", "=", " ", 
+       RowBox[{"Mean", "@", "imgCropped"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"imgContrast", " ", "=", " ", 
+       RowBox[{"ImageAdjust", "[", 
+        RowBox[{"imgCropped", ",", " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"10", "*", 
+            RowBox[{"brightness", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+           RowBox[{"0.4", "/", 
+            RowBox[{"brightness", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}]}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"procImg", "=", 
+       RowBox[{"DeleteSmallComponents", "[", 
+        RowBox[{
+         RowBox[{"FillingTransform", "[", 
+          RowBox[{
+           RowBox[{"Binarize", "[", 
+            RowBox[{"imgContrast", ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", " ", "0.3"}], "}"}]}], "]"}], ",", " ", 
+           RowBox[{"Padding", "->", "\"\<Fixed\>\""}]}], "]"}], ",", " ", 
+         "300"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"centers", "=", 
+       RowBox[{
+        RowBox[{"ComponentMeasurements", "[", 
+         RowBox[{"procImg", ",", "\"\<Centroid\>\"", ",", " ", 
+          RowBox[{
+           RowBox[{"#Circularity", ">", "0.4"}], " ", "&"}]}], "]"}], "/.", 
+        "\[VeryThinSpace]", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"a_", "\[Rule]", "b_"}], ")"}], "\[Rule]", "b"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"volumes", "=", 
+         FractionBox[
+          RowBox[{"4", " ", "\[Pi]", " ", 
+           SuperscriptBox["radii", "3"]}], "3"]}], ";"}], "*)"}], 
+      "\[IndentingNewLine]", 
+      RowBox[{"centroidNo", "=", 
+       RowBox[{"Append", "[", 
+        RowBox[{"centroidNo", ",", " ", 
+         RowBox[{
+          RowBox[{"Dimensions", "[", 
+           RowBox[{"centers", ",", " ", "1"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Which", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Dimensions", "[", 
+            RowBox[{"centers", ",", " ", "1"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "==", "2"}], ")"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"radii", "=", 
+          RowBox[{
+           RowBox[{"ComponentMeasurements", "[", 
+            RowBox[{"procImg", ",", "\"\<EquivalentDiskRadius\>\"", ",", " ", 
+             RowBox[{
+              RowBox[{"#Circularity", ">", "0.4"}], " ", "&"}]}], "]"}], "/.",
+            "\[VeryThinSpace]", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"a_", "\[Rule]", "b_"}], ")"}], "\[Rule]", "b"}]}]}], 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{"radiiLength", " ", "=", " ", 
+          RowBox[{"Append", "[", 
+           RowBox[{"radiiLength", ",", " ", "radii"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"centerDistance", " ", "=", " ", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"centers", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], "[", 
+                RowBox[{"[", "1", "]"}], "]"}], "-", 
+               RowBox[{
+                RowBox[{"centers", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], "[", 
+                RowBox[{"[", "1", "]"}], "]"}]}], ")"}], "^", "2"}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"centers", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}], "[", 
+                RowBox[{"[", "2", "]"}], "]"}], "-", 
+               RowBox[{
+                RowBox[{"centers", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], "[", 
+                RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "^", "2"}]}], 
+           "]"}]}], ";", 
+         RowBox[{"centroidDistance", "=", 
+          RowBox[{"Append", "[", 
+           RowBox[{"centroidDistance", ",", "centerDistance"}], "]"}]}]}], 
+        ",", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{
+          "In", " ", "case", " ", "there", " ", "is", " ", "only", " ", "one",
+            " ", "bubble"}], ",", " ", 
+          RowBox[{
+          "record", " ", "its", " ", "radius", " ", "and", " ", "centroid", 
+           " ", "distance", " ", "set", " ", "to", " ", "0"}]}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Dimensions", "[", 
+            RowBox[{"centers", ",", " ", "1"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "==", "1"}], ")"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"radii", "=", 
+          RowBox[{
+           RowBox[{"ComponentMeasurements", "[", 
+            RowBox[{"procImg", ",", "\"\<EquivalentDiskRadius\>\"", ",", " ", 
+             RowBox[{
+              RowBox[{"#Circularity", ">", "0.4"}], " ", "&"}]}], "]"}], "/.",
+            "\[VeryThinSpace]", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"a_", "\[Rule]", "b_"}], ")"}], "\[Rule]", "b"}]}]}], 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"Append", " ", "second", " ", "radius"}], "=", "0"}], 
+          "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"radii", " ", "=", " ", 
+          RowBox[{"Append", "[", 
+           RowBox[{"radii", ",", " ", "0"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"radiiLength", " ", "=", " ", 
+          RowBox[{"Append", "[", 
+           RowBox[{"radiiLength", ",", " ", "radii"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"centroidDistance", "=", 
+          RowBox[{"Append", "[", 
+           RowBox[{"centroidDistance", ",", " ", "0"}], "]"}]}]}], ",", 
+        "\[IndentingNewLine]", "True", ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"centroidDistance", "=", 
+          RowBox[{"Append", "[", 
+           RowBox[{"centroidDistance", ",", " ", "0"}], "]"}]}], ";", 
+         "\[IndentingNewLine]", 
+         RowBox[{"radiiLength", " ", "=", " ", 
+          RowBox[{"Append", "[", 
+           RowBox[{"radiiLength", ",", " ", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", " ", "0"}], "}"}]}], "]"}]}], ";"}]}], 
+       "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", ")"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"SelectWN", "[", 
+     RowBox[{"list_", ",", "firstq_", ",", "lastq_", ",", "trinaryfunc_"}], 
+     "]"}], ":=", 
+    RowBox[{"(", "\[IndentingNewLine]", 
+     RowBox[{"Join", "[", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{"firstq", ",", 
+         RowBox[{"{", 
+          RowBox[{"First", "@", "list"}], "}"}], ",", 
+         RowBox[{"{", "}"}]}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Partition", "[", 
+           RowBox[{"list", ",", "3", ",", "1"}], "]"}], ",", 
+          RowBox[{
+           RowBox[{"trinaryfunc", "@@", "#"}], "&"}]}], "]"}], "[", 
+        RowBox[{"[", 
+         RowBox[{"All", ",", "2"}], "]"}], "]"}], ",", 
+       RowBox[{"If", "[", 
+        RowBox[{"lastq", ",", 
+         RowBox[{"{", 
+          RowBox[{"Last", "@", "list"}], "}"}], ",", 
+         RowBox[{"{", "}"}]}], "]"}]}], "]"}], "\[IndentingNewLine]", ")"}]}],
+    "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "SetDirectory", "[", 
+     "\"\<C:\\\\Users\\\\Rares\\\\Desktop\\\\bubbles\\\\bubble_data\\\\Cordin \
+1 Prentice set\\\\Data Analysis Project - URG\\\\Best of Close to Sub\\\\0.2v \
+parallel config\\\\2006Aug2_085024\>\"", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"vidFrames", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Import", "[", "#", "]"}], "&"}], "/@", 
+      RowBox[{"FileNames", "[", "\"\<*.jpg\>\"", "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"centroidNo", " ", "=", " ", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"centroidDistance", " ", "=", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"radiiLength", "=", " ", 
+     RowBox[{"{", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Do", "[", 
+     RowBox[{
+      RowBox[{"ProcessImage", "[", 
+       RowBox[{"vidFrames", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", " ", "1", ",", " ", 
+        RowBox[{"Length", "[", "vidFrames", "]"}]}], "}"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"partitionedFrames", " ", "=", " ", 
+     RowBox[{"Partition", "[", 
+      RowBox[{"centroidDistance", ",", " ", "3", ",", " ", "1"}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Do", "[", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"partitionedFrames", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "2"}], "]"}], "]"}], "==", "0"}], " ", ",", " ", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"partitionedFrames", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "1"}], "]"}], "]"}], "!=", "0"}], ",", " ", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"partitionedFrames", "[", 
+              RowBox[{"[", 
+               RowBox[{"i", ",", "2"}], "]"}], "]"}], "!=", "0"}], ",", 
+            "True", ",", "False"}], "]"}]}], "]"}]}], "]"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", "partitionedFrames", "]"}]}], "}"}]}], "]"}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dataset", " ", "=", " ", 
+     RowBox[{"Join", "[", 
+      RowBox[{"radiiLength", " ", ",", 
+       RowBox[{"Transpose", "[", 
+        RowBox[{"{", "centroidDistance", "}"}], "]"}], ",", " ", "2"}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Exporting", " ", "to", " ", "result", " ", "sheet"}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dataTable", " ", "=", 
+     RowBox[{"Join", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Radius 1 (px)\>\"", ",", " ", "\"\<Radius 2 (px)\>\"", ",", 
+          " ", "\"\<Centroid Distance (px)\>\""}], "}"}], "}"}], ",", 
+       "dataset", ",", " ", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+    "SetDirectory", "[", "\"\<C:\\\\Users\\\\Rares\\\\Desktop\\\\bubbles\>\"",
+      "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Export", "[", 
+     RowBox[{
+     "\"\<results.csv\>\"", ",", "dataTable", ",", " ", "\"\<CSV\>\""}], 
+     "]"}], ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.9143253007237506`*^9, 3.9143253867989926`*^9}, {
+   3.914325449808404*^9, 3.9143254718549204`*^9}, {3.9143257171729774`*^9, 
+   3.9143257211130896`*^9}, {3.9143257591025143`*^9, 
+   3.9143258826982384`*^9}, {3.9143259313770337`*^9, 3.91432595609918*^9}, {
+   3.9143260267805986`*^9, 3.9143260283802156`*^9}, {3.914326061090226*^9, 
+   3.9143260671089864`*^9}, {3.9143261371100807`*^9, 3.914326157695873*^9}, {
+   3.914326201056367*^9, 3.9143262323436937`*^9}, {3.914326272950815*^9, 
+   3.914326292305545*^9}, {3.9143265388874025`*^9, 3.9143266298793344`*^9}, {
+   3.9143266929390526`*^9, 3.9143267874549847`*^9}, {3.9143268636417775`*^9, 
+   3.914326900459729*^9}, {3.9143269530401134`*^9, 3.9143269583827734`*^9}, {
+   3.9143270837567077`*^9, 3.914327155865741*^9}, {3.9143272071411667`*^9, 
+   3.9143272074907255`*^9}, {3.9143272982834153`*^9, 3.914327330841208*^9}, {
+   3.9143376804686065`*^9, 3.91433772854902*^9}, {3.914337826389909*^9, 
+   3.9143378888807244`*^9}, {3.914337932116019*^9, 3.9143380508399262`*^9}, {
+   3.914338139236807*^9, 3.914338156956046*^9}, {3.914338187760542*^9, 
+   3.914338190262849*^9}, {3.91433824312293*^9, 3.914338250702994*^9}, {
+   3.914338367730325*^9, 3.914338375914793*^9}, {3.914338442690843*^9, 
+   3.914338491757662*^9}, {3.9143385284789467`*^9, 3.914338539331355*^9}, {
+   3.914338570978334*^9, 3.914338575617369*^9}, {3.91433863729239*^9, 
+   3.914338655264321*^9}, {3.9143387087104545`*^9, 3.9143387347381587`*^9}, {
+   3.914338811245331*^9, 3.914338863264971*^9}, {3.9143388964944534`*^9, 
+   3.914338899496442*^9}, {3.9143389387746377`*^9, 3.9143390561317396`*^9}, {
+   3.9143390990581226`*^9, 3.9143391330679493`*^9}, {3.9143393034342537`*^9, 
+   3.9143393043818455`*^9}, {3.914339369470138*^9, 3.914339369662771*^9}, {
+   3.91448064833963*^9, 3.914480667549252*^9}, {3.9144807156640453`*^9, 
+   3.9144807729839783`*^9}, {3.914480860392051*^9, 3.9144808677897797`*^9}, {
+   3.9144818886384416`*^9, 3.914481954806322*^9}, {3.9144820891787653`*^9, 
+   3.9144821193130407`*^9}, 3.9144821553246546`*^9, {3.9144821860306053`*^9, 
+   3.9144822373065577`*^9}, {3.9144822704203024`*^9, 
+   3.9144822985243406`*^9}, {3.914482429617119*^9, 3.914482453864198*^9}, {
+   3.914482618269643*^9, 3.914482618626886*^9}, {3.9144827800076*^9, 
+   3.91448279343742*^9}, {3.914482997474502*^9, 3.9144830451854115`*^9}, {
+   3.91448324557957*^9, 3.91448324890242*^9}, {3.914484122382986*^9, 
+   3.9144841244940147`*^9}, {3.914484229288004*^9, 3.914484279801709*^9}, {
+   3.91449179037183*^9, 3.9144920188147974`*^9}, {3.9144920784246473`*^9, 
+   3.914492078634966*^9}, {3.9144921210982723`*^9, 3.9144921772014713`*^9}, {
+   3.914492243024473*^9, 3.9144922715385265`*^9}, {3.9144923227214127`*^9, 
+   3.914492346776165*^9}, {3.914492376808635*^9, 3.9144923913848257`*^9}, {
+   3.9144924363919425`*^9, 3.9144924688236322`*^9}, {3.9144925248896613`*^9, 
+   3.914492562295293*^9}, {3.914492597126996*^9, 3.9144926023977013`*^9}, {
+   3.9144926620744715`*^9, 3.9144926639060555`*^9}, {3.914492982810701*^9, 
+   3.914492985311865*^9}, {3.914493554988177*^9, 3.914493559520522*^9}, {
+   3.9144935918308706`*^9, 3.914493621650374*^9}, {3.914493732521473*^9, 
+   3.914493734342456*^9}, {3.9144939595746937`*^9, 3.914494004469606*^9}, {
+   3.914494538625429*^9, 3.914494589061714*^9}, {3.9144947338997183`*^9, 
+   3.91449473410992*^9}, {3.9144948332715387`*^9, 3.9144949193461304`*^9}, {
+   3.914494954756742*^9, 3.9144949699236355`*^9}, {3.914495133613886*^9, 
+   3.9144952488156204`*^9}},
+ CellLabel->"In[25]:=",ExpressionUUID->"3650cbea-1a46-4b8e-b982-10be0a495c99"]
+},
+WindowSize->{656.25, 657.75},
+WindowMargins->{{228, Automatic}, {0, Automatic}},
+FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (July 24, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"71060321-527b-472a-9462-c9c0f7534a42"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 15419, 349, 1406, "Input",ExpressionUUID->"3650cbea-1a46-4b8e-b982-10be0a495c99"]
+}
+]
+*)
+
