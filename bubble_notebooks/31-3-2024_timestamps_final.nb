@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     26385,        670]
-NotebookOptionsPosition[     25985,        655]
-NotebookOutlinePosition[     26429,        672]
-CellTagsIndexPosition[     26386,        669]
+NotebookDataLength[     27571,        691]
+NotebookOptionsPosition[     27171,        676]
+NotebookOutlinePosition[     27615,        693]
+CellTagsIndexPosition[     27572,        690]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -24,8 +24,8 @@ Cell[BoxData[
    RowBox[{
    "Added", " ", "timestamps", " ", "and", " ", "adjusted", " ", 
     "significant", " ", "figures", " ", "based", " ", "on", " ", "calculated",
-     " ", "uncertainty"}], "*)"}], "\[IndentingNewLine]", 
-  "\[IndentingNewLine]", 
+     " ", "uncertainty", "\[IndentingNewLine]", "Final", " ", "version"}], 
+   "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
   RowBox[{
    RowBox[{
     RowBox[{"ProcessImage", "[", "img_", "]"}], ":=", 
@@ -33,59 +33,58 @@ Cell[BoxData[
      RowBox[{"(*", 
       RowBox[{"Pre", "-", "processing"}], "*)"}], "\[IndentingNewLine]", 
      RowBox[{
-      RowBox[{
-       RowBox[{"imgCropped", "=", 
-        RowBox[{"ImageCrop", "[", 
-         RowBox[{"img", ",", 
-          RowBox[{"{", 
-           RowBox[{"500", ",", "500"}], "}"}]}], "]"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"brightness", " ", "=", " ", 
-        RowBox[{"Mean", "@", "imgCropped"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{"imgContrast", " ", "=", " ", 
-        RowBox[{"ImageAdjust", "[", 
-         RowBox[{"imgCropped", ",", " ", 
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"10", "*", 
-             RowBox[{"brightness", "[", 
-              RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
-            RowBox[{"0.4", "/", 
-             RowBox[{"brightness", "[", 
-              RowBox[{"[", "1", "]"}], "]"}]}]}], "}"}]}], "]"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"(*", 
-        RowBox[{
-        "Generating", " ", "binary", " ", "mask", " ", "and", " ", 
-         "extracting", " ", "centers"}], "*)"}], "\[IndentingNewLine]", 
-       RowBox[{"procImg", "=", 
-        RowBox[{"DeleteSmallComponents", "[", 
-         RowBox[{
-          RowBox[{"FillingTransform", "[", 
-           RowBox[{
-            RowBox[{"Binarize", "[", 
-             RowBox[{"imgContrast", ",", " ", 
-              RowBox[{"{", 
-               RowBox[{"0", ",", " ", "0.3"}], "}"}]}], "]"}], ",", " ", 
-            RowBox[{"Padding", "->", "\"\<Fixed\>\""}]}], "]"}], ",", " ", 
-          "300"}], "]"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{"selectedObjects", "=", 
-        RowBox[{"SelectComponents", "[", 
-         RowBox[{"procImg", ",", " ", 
+      RowBox[{"imgCropped", "=", 
+       RowBox[{"ImageCrop", "[", 
+        RowBox[{"img", ",", 
+         RowBox[{"{", 
+          RowBox[{"500", ",", "500"}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"brightness", " ", "=", " ", 
+       RowBox[{"Mean", "@", "imgCropped"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"imgContrast", " ", "=", " ", 
+       RowBox[{"ImageAdjust", "[", 
+        RowBox[{"imgCropped", ",", " ", 
+         RowBox[{"{", 
           RowBox[{
-           RowBox[{"#Circularity", ">", "0.4"}], " ", "&"}]}], "]"}]}], ";", 
-       "\[IndentingNewLine]", 
-       RowBox[{"centers", "=", 
+           RowBox[{"10", "*", 
+            RowBox[{"brightness", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+           RowBox[{"0.4", "/", 
+            RowBox[{"brightness", "[", 
+             RowBox[{"[", "1", "]"}], "]"}]}]}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+       "Generating", " ", "binary", " ", "mask", " ", "and", " ", 
+        "extracting", " ", "centers"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"procImg", "=", 
+       RowBox[{"DeleteSmallComponents", "[", 
         RowBox[{
-         RowBox[{"ComponentMeasurements", "[", 
-          RowBox[{"procImg", ",", "\"\<Centroid\>\"", ",", " ", 
-           RowBox[{
-            RowBox[{"#Circularity", ">", "0.4"}], " ", "&"}]}], "]"}], "/.", 
-         "\[VeryThinSpace]", 
+         RowBox[{"FillingTransform", "[", 
+          RowBox[{
+           RowBox[{"Binarize", "[", 
+            RowBox[{"imgContrast", ",", " ", 
+             RowBox[{"{", 
+              RowBox[{"0", ",", " ", "0.3"}], "}"}]}], "]"}], ",", " ", 
+           RowBox[{"Padding", "->", "\"\<Fixed\>\""}]}], "]"}], ",", " ", 
+         "300"}], "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"selectedObjects", "=", 
+       RowBox[{"SelectComponents", "[", 
+        RowBox[{"procImg", ",", " ", 
          RowBox[{
-          RowBox[{"(", 
-           RowBox[{"a_", "\[Rule]", "b_"}], ")"}], "\[Rule]", "b"}]}]}], 
-       ";"}], "\[IndentingNewLine]", 
+          RowBox[{"#Circularity", ">", "0.4"}], " ", "&"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"centers", "=", 
+       RowBox[{
+        RowBox[{"ComponentMeasurements", "[", 
+         RowBox[{"procImg", ",", "\"\<Centroid\>\"", ",", " ", 
+          RowBox[{
+           RowBox[{"#Circularity", ">", "0.4"}], " ", "&"}]}], "]"}], "/.", 
+        "\[VeryThinSpace]", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"a_", "\[Rule]", "b_"}], ")"}], "\[Rule]", "b"}]}]}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
       RowBox[{"(*", 
        RowBox[{
         RowBox[{"Print", "[", "imgContrast", "]"}], ";"}], "*)"}], 
@@ -99,7 +98,13 @@ Cell[BoxData[
         RowBox[{"Print", "[", 
          RowBox[{"HighlightImage", "[", 
           RowBox[{"imgCropped", ",", " ", "selectedObjects"}], "]"}], "]"}], 
-        ";"}], "*)"}], ";", "\[IndentingNewLine]", 
+        ";"}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"Print", "[", 
+         RowBox[{"HighlightImage", "[", 
+          RowBox[{"imgCropped", ",", " ", "centers"}], "]"}], "]"}], ";"}], 
+       "*)"}], "\[IndentingNewLine]", 
       RowBox[{"centroidNo", "=", 
        RowBox[{"Append", "[", 
         RowBox[{"centroidNo", ",", " ", 
@@ -395,7 +400,7 @@ Cell[BoxData[
     "SetDirectory", "[", 
      "\"\<C:\\\\Users\\\\Rares\\\\Desktop\\\\bubbles\\\\bubble_data\\\\Cordin \
 1 Prentice set\\\\Data Analysis Project - URG\\\\Best of Close to Sub\\\\0.2v \
-parallel config\\\\2006Aug2_083302\>\"", "]"}], ";"}], "\[IndentingNewLine]", 
+parallel config\\\\2006Aug2_085024\>\"", "]"}], ";"}], "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{
     "Replace", " ", "with", " ", "your", " ", "image", " ", "format", " ", 
@@ -482,12 +487,23 @@ parallel config\\\\2006Aug2_083302\>\"", "]"}], ";"}], "\[IndentingNewLine]",
         RowBox[{
          RowBox[{"Length", "[", "centroidDistance", "]"}], "-", "1"}]}], 
        "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Dataset", " ", "measureables", " ", "to", " ", "fill"}], "*)"}], 
+   "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"scale", "=", "8.25"}], ";"}], 
    RowBox[{"(*", 
     RowBox[{
      RowBox[{"px", "/", "micron"}], ",", " ", 
      RowBox[{"found", " ", "with", " ", "ImageJ"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"frequency", "=", "1.267326"}], ";"}], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+    "frequency", " ", "of", " ", "camera", " ", "used", " ", "in", " ", 
+     "MHz"}], "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
    "\[IndentingNewLine]", 
    RowBox[{
     RowBox[{"uncertainty", "=", 
@@ -507,13 +523,7 @@ parallel config\\\\2006Aug2_083302\>\"", "]"}], ";"}], "\[IndentingNewLine]",
       RowBox[{"uncertainty", ",", ".001"}], "]"}]}], ";"}], " ", 
    RowBox[{"(*", 
     RowBox[{"rounding", " ", "to", " ", "nanometer", " ", "scale"}], "*)"}], 
-   "\[IndentingNewLine]", 
-   RowBox[{
-    RowBox[{"frequency", "=", "1.103448"}], ";"}], " ", 
-   RowBox[{"(*", 
-    RowBox[{
-    "frequency", " ", "of", " ", "camera", " ", "used", " ", "in", " ", 
-     "MHz"}], "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
    RowBox[{"(*", 
     RowBox[{"creating", " ", "timestamps"}], "*)"}], "\[IndentingNewLine]", 
    "\[IndentingNewLine]", 
@@ -650,8 +660,19 @@ parallel config\\\\2006Aug2_083302\>\"", "]"}], ";"}], "\[IndentingNewLine]",
    3.920901959113367*^9}, {3.920902061546999*^9, 3.92090206209379*^9}, {
    3.920902115299404*^9, 3.920902157543951*^9}, {3.92090219484864*^9, 
    3.920902227405918*^9}, {3.920902274814865*^9, 3.920902284789707*^9}, {
-   3.9209186677279625`*^9, 3.920918669625002*^9}},
- CellLabel->"In[1]:=",ExpressionUUID->"c29647bf-9819-8148-94f8-2303749e4758"]
+   3.920918667727963*^9, 3.920918669625002*^9}, {3.921149806259294*^9, 
+   3.921149808321935*^9}, {3.921149875740694*^9, 3.9211499357673225`*^9}, 
+   3.921157989649999*^9, {3.921162199762337*^9, 3.921162202663952*^9}, {
+   3.921162383162714*^9, 3.921162386212378*^9}, {3.921167489063692*^9, 
+   3.921167536168585*^9}, {3.9211675818548336`*^9, 3.92116761354234*^9}, {
+   3.921167746126995*^9, 3.921167746492178*^9}, {3.921172774994364*^9, 
+   3.921172778796013*^9}, {3.921172948491057*^9, 3.9211729487726*^9}, {
+   3.9212528740116787`*^9, 3.921252875629772*^9}, {3.921253075957731*^9, 
+   3.92125307895158*^9}, {3.9212546511005535`*^9, 3.921254652660601*^9}, {
+   3.921255624130111*^9, 3.921255661037359*^9}, {3.921256477159956*^9, 
+   3.921256488605509*^9}, {3.9215781827651043`*^9, 
+   3.921578235295471*^9}},ExpressionUUID->"c29647bf-9819-8148-94f8-\
+2303749e4758"]
 },
 WindowSize->{656.25, 657.75},
 WindowMargins->{{Automatic, 104.25}, {2.25, Automatic}},
@@ -671,7 +692,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 25423, 633, 2218, "Input",ExpressionUUID->"c29647bf-9819-8148-94f8-2303749e4758"]
+Cell[558, 20, 26609, 654, 2338, "Input",ExpressionUUID->"c29647bf-9819-8148-94f8-2303749e4758"]
 }
 ]
 *)
