@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     27571,        691]
-NotebookOptionsPosition[     27171,        676]
-NotebookOutlinePosition[     27615,        693]
-CellTagsIndexPosition[     27572,        690]
+NotebookDataLength[     27644,        693]
+NotebookOptionsPosition[     27244,        678]
+NotebookOutlinePosition[     27688,        695]
+CellTagsIndexPosition[     27645,        692]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -618,9 +618,10 @@ parallel config\\\\2006Aug2_085024\>\"", "]"}], ";"}], "\[IndentingNewLine]",
        RowBox[{"{", 
         RowBox[{"{", 
          RowBox[{
-         "\"\<Time (ms)\>\"", ",", "\"\<Radius 1 (microns)\>\"", ",", " ", 
-          "\"\<Radius 2 (microns)\>\"", ",", "\"\<Volume 1 (microns^3)\>\"", 
-          ",", " ", "\"\<Volume 2 (microns^3)\>\"", ",", " ", 
+         "\"\<Time (microseconds)\>\"", ",", "\"\<Radius 1 (microns)\>\"", 
+          ",", " ", "\"\<Radius 2 (microns)\>\"", ",", 
+          "\"\<Volume 1 (microns^3)\>\"", ",", " ", 
+          "\"\<Volume 2 (microns^3)\>\"", ",", " ", 
           "\"\<Centroid Distance (microns)\>\""}], "}"}], "}"}], ",", 
        "dataset", ",", " ", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
    "\[IndentingNewLine]", 
@@ -670,8 +671,9 @@ parallel config\\\\2006Aug2_085024\>\"", "]"}], ";"}], "\[IndentingNewLine]",
    3.9212528740116787`*^9, 3.921252875629772*^9}, {3.921253075957731*^9, 
    3.92125307895158*^9}, {3.9212546511005535`*^9, 3.921254652660601*^9}, {
    3.921255624130111*^9, 3.921255661037359*^9}, {3.921256477159956*^9, 
-   3.921256488605509*^9}, {3.9215781827651043`*^9, 
-   3.921578235295471*^9}},ExpressionUUID->"c29647bf-9819-8148-94f8-\
+   3.921256488605509*^9}, {3.9215781827651043`*^9, 3.921578235295471*^9}, {
+   3.921581387923853*^9, 
+   3.9215813907114697`*^9}},ExpressionUUID->"c29647bf-9819-8148-94f8-\
 2303749e4758"]
 },
 WindowSize->{656.25, 657.75},
@@ -692,7 +694,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 26609, 654, 2338, "Input",ExpressionUUID->"c29647bf-9819-8148-94f8-2303749e4758"]
+Cell[558, 20, 26682, 656, 2338, "Input",ExpressionUUID->"c29647bf-9819-8148-94f8-2303749e4758"]
 }
 ]
 *)
